@@ -1,5 +1,6 @@
 import { GoogleGenAI, Modality } from '@google/genai';
 import * as fs from 'node:fs';
+import * as path from 'node:path';
 
 const ai = new GoogleGenAI({
   project: process.env.GOOGLE_CLOUD_PROJECT,
@@ -19,6 +20,20 @@ const id = Date.now();
 const outputDir = `output/${id}`;
 fs.mkdirSync(outputDir, { recursive: true });
 
+// Get all image files from the images directory
+function getImageFiles() {
+  const imagesDir = 'images';
+  const files = fs.readdirSync(imagesDir);
+  
+  // Filter for PNG files and remove the .png extension
+  return files
+    .filter(file => file.endsWith('.png'))
+    .map(file => path.basename(file, '.png'));
+}
+
+// Get all available fish images
+const availableFishImages = getImageFiles();
+
 async function generateOne(i) {
 
   // Load the image from the local file system
@@ -37,35 +52,28 @@ async function generateOne(i) {
   // Prepare the content parts
   const contents = [
     { text: getPromptData('prompt_detailed') },
-    {
-      inlineData: {
-        mimeType: "image/png",
-        data: getImageData('fish_blue'),
-      },
-    },
-    { text: "EXAMPLES Generate a picture of a brown fish." },
-    {
-      inlineData: {
-        mimeType: "image/png",
-        data: getImageData('fish_brown'),
-      },
-    },
-    { text: "EXAMPLES Generate a picture of a green fish." },
-    {
-      inlineData: {
-        mimeType: "image/png",
-        data: getImageData('fish_green'),
-      },
-    },
-    { text: "EXAMPLES Generate a picture of a red fish." },
-    {
-      inlineData: {
-        mimeType: "image/png",
-        data: getImageData('fish_red'),
-      },
-    },
-    { text: `Now it's your turn: Generate a picture of a ${fishType}.` },
   ];
+
+  // Add all available fish images as examples
+  for (const imageName of availableFishImages) {
+    // Extract the color or descriptive part from the filename (assuming format like "fish_blue")
+    const parts = imageName.split('_');
+    const description = parts.length > 1 ? parts[1] : imageName;
+    
+    // Add text prompt for this example
+    contents.push({ text: `EXAMPLES Generate a picture of a ${description} fish.` });
+    
+    // Add the image data
+    contents.push({
+      inlineData: {
+        mimeType: "image/png",
+        data: getImageData(imageName),
+      },
+    });
+  }
+  
+  // Add the final instruction
+  contents.push({ text: `Now it's your turn: Generate a picture of a ${fishType}.` });
 
   // Set responseModalities to include "Image" so the model can generate an image
   const response = await ai.models.generateContent({
@@ -92,8 +100,7 @@ async function generateOne(i) {
   }
 }
 
-// do this 40 times in parallel
-const times = 40;
-for (let i = 0; i < times; i++) {
+// Generate the specified number of images in parallel
+for (let i = 0; i < fishCount; i++) {
   generateOne(i);
 }
