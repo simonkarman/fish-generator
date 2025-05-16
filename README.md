@@ -26,7 +26,7 @@ export GOOGLE_CLOUD_PROJECT="your-project-id"
 export GOOGLE_CLOUD_LOCATION=global
 export GOOGLE_GENAI_USE_VERTEXAI=True
 export FISH_COUNT=30 # Number of images to generate
-export FISH_TYPE="seahorse" # Or any other sea creature you want to generate
+export FISH_TYPE="shark" # Or any other sea creature you want to generate
 
 # Run the generator
 npm start
