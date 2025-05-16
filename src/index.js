@@ -4,7 +4,15 @@ import * as fs from 'node:fs';
 const ai = new GoogleGenAI({
   project: process.env.GOOGLE_CLOUD_PROJECT,
 });
-const fishType = process.env.FISH_TYPE;
+
+// Get fish type from environment variable or use "fish" as default
+const fishType = process.env.FISH_TYPE ?? "shark";
+
+// Get fish count from environment variable or use 40 as default
+let fishCount = parseInt(process.env.FISH_COUNT ?? '40', 10);
+if (fishCount === undefined || isNaN(fishCount)) {
+  fishCount = 40;
+}
 
 async function main(i) {
 
