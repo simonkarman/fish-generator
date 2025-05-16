@@ -112,6 +112,11 @@ async function main(i) {
   }
 }
 
+// create output directory if it doesn't exist
+if (!fs.existsSync('output')) {
+  fs.mkdirSync('output');
+}
+
 // do this 40 times in parallel
 const times = 40;
 for (let i = 0; i < times; i++) {
