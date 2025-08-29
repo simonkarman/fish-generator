@@ -27,7 +27,7 @@ const outputDir = `output/${entityCategory}/${fileSafeEntityGenerationName}/${id
 fs.mkdirSync(outputDir, { recursive: true });
 
 // Get all image files from the images directory
-function getImageFiles() {
+function getImageFiles(maxExamples = 0) {
   const imagesDir = `images/${entityCategory}`;
   const files = fs.readdirSync(imagesDir);
 
@@ -36,9 +36,8 @@ function getImageFiles() {
     .filter(file => file.endsWith('.png'))
     .map(file => path.basename(file, '.png'));
 
-  // Limit files to be random distribution of maximum of 5 examples
-  const maxExamples = 4;
-  while (pngFiles.length > maxExamples) {
+  // Limit files to be random distribution of maximum examples
+  while (maxExamples !== 0 && pngFiles.length > maxExamples) {
     const randomIndex = Math.floor(Math.random() * pngFiles.length);
     pngFiles.splice(randomIndex, 1);
   }
@@ -89,7 +88,7 @@ contents.push({ text: `Now it's your turn. Remember to use a white background: G
 
 async function generateOne(i) {
   const response = await ai.models.generateContent({
-    model: "gemini-2.0-flash-preview-image-generation",
+    model: "gemini-2.5-flash-image-preview",
     contents: contents,
     config: {
       // Set responseModalities to include "Image" so the model can read and generate images
@@ -113,6 +112,8 @@ async function generateOne(i) {
 
 // Generate the specified number of images in parallel
 console.info(`Going to generate ${entityCount} images of ${entityGeneration} ${entityCategory}...`);
+const generations = [];
 for (let i = 0; i < entityCount; i++) {
-  generateOne(i);
+  generations.push(generateOne(i));
 }
+await Promise.all(generations);

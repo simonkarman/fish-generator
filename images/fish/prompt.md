@@ -5,6 +5,7 @@ Overall Style
 - Flat design: No gradients, minimal to no shading. If shading exists, it's a solid block of a slightly darker/lighter color (e.g., a slightly darker fin color than the body).
 - Cartoonish and cute: Simplified, friendly appearance.
 - Vector-like appearance: Clean lines, solid fills, though not necessarily true vector.
+- Transparent background (output images should be on a transparent background for use in a game engine).
 
 Shapes
 - Simplified, geometric shapes: Bodies are generally ovoid, teardrop, or rounded rectangular.
