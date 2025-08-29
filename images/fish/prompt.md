@@ -1,24 +1,25 @@
 Goal: Generate 2D cartoon fish assets in a flat design vector art style, similar to "Kenney game assets"
 
 Overall Style
-- 2D, side-view/profile only.
+- 2D, side-view/profile only. The fish should be facing right.
 - Flat design: No gradients, minimal to no shading. If shading exists, it's a solid block of a slightly darker/lighter color (e.g., a slightly darker fin color than the body).
 - Cartoonish and cute: Simplified, friendly appearance.
 - Vector-like appearance: Clean lines, solid fills, though not necessarily true vector.
-- Transparent background (output images should be on a transparent background for use in a game engine).
+- White background (output images should be on white background for use in a game engine).
 
 Shapes
 - Simplified, geometric shapes: Bodies are generally ovoid, teardrop, or rounded rectangular.
 - Fins (Dorsal, Pectoral, Caudal/Tail): Composed of simple geometric shapes like triangles, rounded rectangles, or trapezoids. Clearly demarcated from the body.
-- Eyes: Small, simple, solid dark circles (e.g., black or very dark hue of a color).
+- Eyes: Small, simple, solid circles (in a slightly darker hue of the color of the fish).
 - Mouth & Gills: Usually absent or extremely simplified (e.g., a single curved line for a mouth, or a slightly different colored patch for a gill cover, but often not present). No detailed teeth or internal mouth features.
 
 Colors
 - Use a white background.
 - Solid, flat colors: Each part (body, fins) is typically a single, uniform color.
 - Bright and clear palette: Colors are distinct and often pastel or vibrant.
-- Limited color palette per fish: Usually 1 main color per fish, and 2-4 distinct shades of that color per fish (e.g., orange body, slightly lighter orange fins). Black and white can be used for non-detailed highlights.
+- Limited color palette per fish: Usually 1 main color per fish, and 2-4 distinct shades of that color per fish (e.g., orange body, slightly lighter orange fins).
 - Minimal to no color gradients or textures. No scales, complex patterns, or surface details.
+- Avoid black or very dark colors for the fish body; prefer lighter, more playful colors.
 
 Target Output
-The fish should look like clean, ready-to-use assets for a 2D casual or children's game on a white background. Focus on visual clarity, simplicity, and a friendly aesthetic. Match the style of the reference images as closely as possible.
+The right-facing fish should look like clean, ready-to-use assets for a 2D casual or children's game on a white background. Focus on visual clarity, simplicity, and a friendly aesthetic. Match the style of the reference images as closely as possible.

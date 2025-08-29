@@ -57,10 +57,18 @@ const getPromptData = () => {
   const textPath = `images/${entityCategory}/prompt.md`;
   return fs.readFileSync(textPath, 'utf8');
 }
+const getPromptDescribeData = () => {
+  const textPath = `images/${entityCategory}/prompt-describe.md`;
+  if (!fs.existsSync(textPath)) {
+    return undefined;
+  }
+  return fs.readFileSync(textPath, 'utf8');
+}
 
 // Prepare the content parts
+const promptData = getPromptData();
 const contents = [
-  { text: getPromptData() },
+  { text: promptData },
 ];
 
 // Add all available entity images as examples
@@ -84,7 +92,17 @@ for (const imageName of getImageFiles()) {
 }
 
 // Add the final instruction
-contents.push({ text: `Now it's your turn. Remember to use a white background: Generate a picture of a ${entityGeneration}.` });
+const describePrompt = getPromptDescribeData();
+let describeText = `Now it's your turn. Remember to use a white background: Generate a picture of a ${entityGeneration}.`
+if (describePrompt) {
+  const entityDescription = await ai.models.generateContent({
+    model: "gemini-2.5-flash",
+    contents: [{ text: describePrompt.replaceAll('<entityGeneration>', entityGeneration) + '\n\nAdhere to following style guide:\n```\n' + promptData + '\n```' }],
+  }).then(response => response.candidates[0].content.parts.map(p => p.text).filter(p => p).join(' '));
+  describeText += ` ${entityDescription}`;
+  console.info(`Generated additional description for ${entityGeneration}: ${describeText}`);
+}
+contents.push({ text: describeText });
 
 async function generateOne(i) {
   const response = await ai.models.generateContent({
