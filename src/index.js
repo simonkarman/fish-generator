@@ -97,7 +97,7 @@ let describeText = `Now it's your turn. Remember to use a white background: Gene
 if (describePrompt) {
   const entityDescription = await ai.models.generateContent({
     model: "gemini-2.5-flash",
-    contents: [{ text: describePrompt.replaceAll('<entityGeneration>', entityGeneration) + '\n\nAdhere to following style guide:\n```\n' + promptData + '\n```' }],
+    contents: [{ text: describePrompt.replaceAll('[ENTITY_GENERATION]', entityGeneration) + '\n\nAdhere to following style guide:\n```\n' + promptData + '\n```' }],
   }).then(response => response.candidates[0].content.parts.map(p => p.text).filter(p => p).join(' '));
   describeText += ` ${entityDescription}`;
   console.info(`Generated additional description for ${entityGeneration}: ${describeText}`);
@@ -132,6 +132,6 @@ async function generateOne(i) {
 console.info(`Going to generate ${entityCount} images of ${entityGeneration} ${entityCategory}...`);
 const generations = [];
 for (let i = 0; i < entityCount; i++) {
-  generations.push(generateOne(i));
+  generations.push(generateOne(i).catch(_ => null));
 }
 await Promise.all(generations);

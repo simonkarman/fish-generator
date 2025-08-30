@@ -1,25 +1,25 @@
-Goal: Generate 2D cartoon fish assets in a flat design vector art style, similar to "Kenney game assets"
+OBJECTIVE: Generate a geometric 2D fish icon with smooth flowing shapes and subtle color depth.
 
-Overall Style
-- 2D, side-view/profile only. The fish should be facing right.
-- Flat design: No gradients, minimal to no shading. If shading exists, it's a solid block of a slightly darker/lighter color (e.g., a slightly darker fin color than the body).
-- Cartoonish and cute: Simplified, friendly appearance.
-- Vector-like appearance: Clean lines, solid fills, though not necessarily true vector.
-- White background (output images should be on white background for use in a game engine).
+COMPOSITION:
+- Right-facing profile on pure white background
+- Center fish, using ~70% of canvas space
 
-Shapes
-- Simplified, geometric shapes: Bodies are generally ovoid, teardrop, or rounded rectangular.
-- Fins (Dorsal, Pectoral, Caudal/Tail): Composed of simple geometric shapes like triangles, rounded rectangles, or trapezoids. Clearly demarcated from the body.
-- Eyes: Small, simple, solid circles (in a slightly darker hue of the color of the fish).
-- Mouth & Gills: Usually absent or extremely simplified (e.g., a single curved line for a mouth, or a slightly different colored patch for a gill cover, but often not present). No detailed teeth or internal mouth features.
+STYLE REQUIREMENTS:
+- Flat design with smooth, flowing geometry - shapes blend seamlessly into each other
+- No hard edges where body meets fins - create smooth transitions
+- Always use exactly 2 shades of the same color: lighter shade for body, darker shade for fins
+- Clean aesthetic with subtle depth through color variation
 
-Colors
-- Use a white background.
-- Solid, flat colors: Each part (body, fins) is typically a single, uniform color.
-- Bright and clear palette: Colors are distinct and often pastel or vibrant.
-- Limited color palette per fish: Usually 1 main color per fish, and 2-4 distinct shades of that color per fish (e.g., orange body, slightly lighter orange fins).
-- Minimal to no color gradients or textures. No scales, complex patterns, or surface details.
-- Avoid black or very dark colors for the fish body; prefer lighter, more playful colors.
+FEATURE APPROACH:
+- Body: Circle or oval in lighter shade
+- Fins: 2-4 triangular shapes that flow smoothly from the body, in darker shade of same color
+- Transitions: Fins must blend seamlessly into body, not appear as separate attached pieces
+- Eye: Small white circle only if specified in description
 
-Target Output
-The right-facing fish should look like clean, ready-to-use assets for a 2D casual or children's game on a white background. Focus on visual clarity, simplicity, and a friendly aesthetic. Match the style of the reference images as closely as possible.
+COLOR GUIDELINES:
+- Use the base color from description for body (lighter shade)
+- Use darker version of same color for all fins
+- Maintain smooth color transitions where shapes meet
+- High contrast against white background
+
+OUTPUT: Smooth geometric fish with flowing shapes and subtle two-tone depth, matching reference style exactly.
